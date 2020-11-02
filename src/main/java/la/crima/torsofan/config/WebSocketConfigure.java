@@ -1,13 +1,12 @@
 package la.crima.torsofan.config;
 
-import la.crima.torsofan.annotations.SocketBody;
-import la.crima.torsofan.annotations.SocketController;
-import la.crima.torsofan.annotations.SocketMapping;
+import la.crima.torsofan.annotations.*;
 import la.crima.torsofan.socket.SocketClient;
 import la.crima.torsofan.socket.SocketServer;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.net.URL;
@@ -15,8 +14,9 @@ import java.util.*;
 
 public class WebSocketConfigure {
 
-    private SocketConfigure configure;
+    private final SocketConfigure configure;
     private SocketServer server;
+    private final Map<Class<?>, Object> instances = new HashMap<>();
 
     public WebSocketConfigure(Integer port) {
         SocketConfigure configure = new SocketConfigure();
@@ -24,22 +24,51 @@ public class WebSocketConfigure {
         this.configure = configure;
     }
 
-    public void start(Class<?> mainClass) throws Exception{
+    public SocketServer start(Class<?> mainClass) throws Exception{
         if (server != null)
             throw new Exception("Socket already run on this server");
 
         server = new SocketServer(configure);
         server.startAsync();
         scanClasses(mainClass);
+
+        return server;
     }
 
     private void scanClasses(Class<?> clazz) throws Exception {
         Set<Method> set = new HashSet<>();
         for (Class<?> cls : getClasses(clazz.getPackage().getName())) {
-            if (cls.isAnnotationPresent(SocketController.class)) {
-                Arrays.stream(cls.getDeclaredMethods())
-                        .filter(method -> method.isAnnotationPresent(SocketMapping.class))
-                        .forEach(set::add);
+            if (cls.isAnnotationPresent(SocketIOController.class)) {
+                instances.put(cls, cls.newInstance());
+                for (Method method : cls.getDeclaredMethods()) {
+                    if (method.isAnnotationPresent(SocketConnectEvent.class)) {
+                        if (method.getParameterCount() != 1)
+                            throw new IllegalArgumentException();
+                        if (hasSocketClientParam(method))
+                            throw new IllegalArgumentException("Missing parameter: SocketClient");
+                        server.addConnectListener(client -> {
+                            try {
+                                method.invoke(instances.get(cls), new SocketClient(server, client));
+                            } catch (IllegalAccessException | InvocationTargetException e) {
+                                e.printStackTrace();
+                            }
+                        });
+                    } else if (method.isAnnotationPresent(SocketDisconnectEvent.class)) {
+                        if (method.getParameterCount() != 1)
+                            throw new IllegalArgumentException();
+                        if (hasSocketClientParam(method))
+                            throw new IllegalArgumentException("Missing parameter: SocketClient");
+                        server.addDisconnectListener(client -> {
+                            try {
+                                method.invoke(instances.get(cls), new SocketClient(server, client));
+                            } catch (IllegalAccessException | InvocationTargetException e) {
+                                e.printStackTrace();
+                            }
+                        });
+                    } else if (method.isAnnotationPresent(SocketMapping.class)) {
+                        set.add(method);
+                    }
+                }
             }
         }
         registerMethod(set);
@@ -53,12 +82,10 @@ public class WebSocketConfigure {
                     .findFirst()
                     .map(Parameter::getType)
                     .orElse(null);
-            Arrays.stream(method.getParameters())
-                    .filter(parameter -> parameter.getType().equals(SocketClient.class))
-                    .findFirst()
-                    .orElseThrow(() -> new IllegalArgumentException("Missing parameter: SocketClient"));
+            if (hasSocketClientParam(method))
+                throw new IllegalArgumentException("Missing parameter: SocketClient");
 
-            server.addEvent(eventName, requestBody, method);
+            server.addEvent(eventName, requestBody, method, instances.get(method.getDeclaringClass()));
         }
     }
 
@@ -94,6 +121,11 @@ public class WebSocketConfigure {
             }
         }
         return classes;
+    }
+
+    private boolean hasSocketClientParam(Method method) {
+        return Arrays.stream(method.getParameters())
+                .noneMatch(parameter -> parameter.getType().equals(SocketClient.class));
     }
 
 }

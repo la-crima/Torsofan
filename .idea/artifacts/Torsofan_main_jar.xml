@@ -1,0 +1,18 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Torsofan.main:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Torsofan_main_jar</output-path>
+    <root id="archive" name="Torsofan.main.jar">
+      <element id="module-output" name="Torsofan.main" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.corundumstudio.socketio/netty-socketio/1.7.18/84c7114f1194053dc3f426bacdb0ff34da015550/netty-socketio-1.7.18.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.netty/netty-handler/4.1.44.Final/c82cfba4ff7b79f3e7828c4ccbfebb756603cc8c/netty-handler-4.1.44.Final.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.netty/netty-buffer/4.1.44.Final/8b2add255e68d0fcb8ccdfaf07399980d3be840f/netty-buffer-4.1.44.Final.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.netty/netty-transport/4.1.44.Final/18a0ce8be8ca639982276efefc0a5604a6523d80/netty-transport-4.1.44.Final.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.netty/netty-common/4.1.44.Final/cd09d9093791482acdcbe8e39ad6fdf62ea3ab7d/netty-common-4.1.44.Final.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.netty/netty-transport-native-unix-common/4.1.44.Final/1af95c8d95aa55038d889944f709fa75efa94094/netty-transport-native-unix-common-4.1.44.Final.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.netty/netty-codec-http/4.1.44.Final/6135c2b3a01e0e1ab4bd8bba89bdefe2d2b24a4c/netty-codec-http-4.1.44.Final.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.netty/netty-transport-native-epoll/4.1.44.Final/c0641bdf67503ce5d83b4d055421ac4bd8e0f218/netty-transport-native-epoll-4.1.44.Final.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.netty/netty-resolver/4.1.44.Final/c644d209302d3fc7770dc0ca257e9f6fe8b38e47/netty-resolver-4.1.44.Final.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.netty/netty-codec/4.1.44.Final/4d759f5015a240a0635c59ce7acced9a364836d/netty-codec-4.1.44.Final.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
