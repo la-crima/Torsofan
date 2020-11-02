@@ -1,4 +1,4 @@
-package lugas.league.spring_websocket.annotations;
+package la.crima.torsofan.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

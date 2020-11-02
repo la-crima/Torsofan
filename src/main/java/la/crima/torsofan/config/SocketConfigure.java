@@ -1,4 +1,4 @@
-package lugas.league.spring_websocket.config;
+package la.crima.torsofan.config;
 
 import com.corundumstudio.socketio.Configuration;
 

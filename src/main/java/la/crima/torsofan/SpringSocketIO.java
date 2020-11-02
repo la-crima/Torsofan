@@ -1,6 +1,6 @@
-package lugas.league.spring_websocket;
+package la.crima.torsofan;
 
-import lugas.league.spring_websocket.config.WebSocketConfigure;
+import la.crima.torsofan.config.WebSocketConfigure;
 
 public class SpringSocketIO {
 

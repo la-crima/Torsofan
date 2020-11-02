@@ -1,4 +1,4 @@
-package lugas.league.spring_websocket.annotations;
+package la.crima.torsofan.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -6,6 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.PARAMETER)
-public @interface SocketBody {
+@Target(ElementType.METHOD)
+public @interface SocketMapping {
+    String value() default "";
 }

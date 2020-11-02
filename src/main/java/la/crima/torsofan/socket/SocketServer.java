@@ -1,13 +1,10 @@
-package lugas.league.spring_websocket.socket;
+package la.crima.torsofan.socket;
 
 import com.corundumstudio.socketio.Configuration;
 import com.corundumstudio.socketio.SocketIOServer;
-import com.corundumstudio.socketio.listener.DataListener;
 
 import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class SocketServer extends SocketIOServer{

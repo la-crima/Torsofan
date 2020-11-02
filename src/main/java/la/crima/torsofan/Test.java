@@ -1,10 +1,10 @@
-package lugas.league.spring_websocket;
+package la.crima.torsofan;
 
-import lugas.league.spring_websocket.annotations.SocketBody;
-import lugas.league.spring_websocket.annotations.SocketController;
-import lugas.league.spring_websocket.annotations.SocketMapping;
-import lugas.league.spring_websocket.config.WebSocketConfigure;
-import lugas.league.spring_websocket.socket.SocketClient;
+import la.crima.torsofan.annotations.SocketBody;
+import la.crima.torsofan.annotations.SocketController;
+import la.crima.torsofan.annotations.SocketMapping;
+import la.crima.torsofan.config.WebSocketConfigure;
+import la.crima.torsofan.socket.SocketClient;
 
 @SocketController
 public class Test {

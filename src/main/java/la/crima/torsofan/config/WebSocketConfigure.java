@@ -1,14 +1,13 @@
-package lugas.league.spring_websocket.config;
+package la.crima.torsofan.config;
 
-import lugas.league.spring_websocket.socket.SocketClient;
-import lugas.league.spring_websocket.socket.SocketServer;
-import lugas.league.spring_websocket.annotations.SocketBody;
-import lugas.league.spring_websocket.annotations.SocketController;
-import lugas.league.spring_websocket.annotations.SocketMapping;
+import la.crima.torsofan.annotations.SocketBody;
+import la.crima.torsofan.annotations.SocketController;
+import la.crima.torsofan.annotations.SocketMapping;
+import la.crima.torsofan.socket.SocketClient;
+import la.crima.torsofan.socket.SocketServer;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.net.URL;
