@@ -3,7 +3,10 @@ package la.crima.torsofan.config;
 import la.crima.torsofan.annotations.*;
 import la.crima.torsofan.socket.SocketClient;
 import la.crima.torsofan.socket.SocketServer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 
+import java.beans.beancontext.BeanContext;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -14,11 +17,14 @@ import java.util.*;
 
 public class WebSocketConfigure {
 
+    private final ApplicationContext context;
+
     private final SocketConfigure configure;
     private SocketServer server;
     private final Map<Class<?>, Object> instances = new HashMap<>();
 
-    public WebSocketConfigure(Integer port) {
+    public WebSocketConfigure(ApplicationContext context, Integer port) {
+        this.context = context;
         SocketConfigure configure = new SocketConfigure();
         configure.setPort(port);
         this.configure = configure;
@@ -39,7 +45,7 @@ public class WebSocketConfigure {
         Set<Method> set = new HashSet<>();
         for (Class<?> cls : getClasses(clazz.getPackage().getName())) {
             if (cls.isAnnotationPresent(SocketIOController.class)) {
-                instances.put(cls, cls.newInstance());
+                instances.put(cls, context.getBean(cls));
                 for (Method method : cls.getDeclaredMethods()) {
                     if (method.isAnnotationPresent(SocketConnectEvent.class)) {
                         if (method.getParameterCount() != 1)

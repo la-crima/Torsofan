@@ -14,7 +14,7 @@ public class Test {
     }
 
     private static WebSocketConfigure webSocketConfigure() {
-        return new WebSocketConfigure(8080);
+        return new WebSocketConfigure(null, 8080);
     }
 
     @SocketConnectEvent
